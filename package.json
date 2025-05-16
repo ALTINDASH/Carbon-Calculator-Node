@@ -1,0 +1,35 @@
+{
+  "name": "calculator_with_node",
+  "version": "1.0.0",
+  "description": "Carbon Calculator with Google Maps integration",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "watch-ts": "tsc -w"
+  },
+  "keywords": [
+    "carbon",
+    "calculator",
+    "maps",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.11",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.10",
+    "express": "^4.18.2",
+    "firebase": "^9.19.1",
+    "typescript": "^5.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1"
+  }
+}
