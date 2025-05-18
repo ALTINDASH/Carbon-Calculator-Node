@@ -7,17 +7,20 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #f0f7f0;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    width: 100%;
 }
 
 header {
     display: flex;
+    flex-direction: column;
+    gap: 15px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
@@ -25,10 +28,11 @@ header {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #4CAF50;
 }
 
 h1 {
-    color: #333;
+    color: #2E7D32;
 }
 
 .auth-btn {
@@ -48,30 +52,40 @@ h1 {
 
 .route-inputs {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
-input[type="text"] {
-    flex: 1;
-    padding: 10px;
+input[type="text"], .vehicle-select {
+    width: 100%;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
 }
 
+input[type="text"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
 #calculate-btn {
-    padding: 10px 20px;
-    background-color: #2196F3;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 16px;
 }
 
 #calculate-btn:hover {
-    background-color: #1976D2;
+    background-color: #45a049;
 }
 
 #map {
@@ -79,6 +93,7 @@ input[type="text"] {
     margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid #4CAF50;
 }
 
 .results-container, .history-container {
@@ -87,17 +102,18 @@ input[type="text"] {
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #4CAF50;
 }
 
 h2 {
-    color: #333;
+    color: #2E7D32;
     margin-bottom: 15px;
 }
 
 #carbon-result, #distance-result {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #666;
+    color: #1B5E20;
 }
 
 #history-list {
@@ -106,12 +122,36 @@ h2 {
 }
 
 .history-item {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.history-item:hover {
+    background-color: #f1f8e9;
 }
 
 .history-item:last-child {
     border-bottom: none;
+}
+
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #ff1744;
 }
 
 /* Modal Styles */
@@ -128,12 +168,13 @@ h2 {
 
 .modal-content {
     background-color: #fff;
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 20px;
     border-radius: 8px;
-    width: 80%;
+    width: 90%;
     max-width: 400px;
     position: relative;
+    border-left: 5px solid #4CAF50;
 }
 
 .close {
@@ -143,10 +184,11 @@ h2 {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    color: #4CAF50;
 }
 
 .close:hover {
-    color: #666;
+    color: #2E7D32;
 }
 
 #auth-form {
@@ -163,7 +205,239 @@ h2 {
     font-size: 16px;
 }
 
+#auth-form input:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
 #auth-form button {
     margin-top: 10px;
     width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#auth-form button:hover {
+    background-color: #45a049;
+}
+
+.chart-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #4CAF50;
+    height: 300px;
+}
+
+#carbonChart {
+    width: 100%;
+    height: 100%;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#user-info {
+    background-color: #e8f5e9;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #4CAF50;
+    color: #2E7D32;
+    font-weight: 500;
+}
+
+#user-email {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#user-email::before {
+    content: "👤";
+}
+
+.vehicle-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.vehicle-select:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+.vehicle-select option {
+    padding: 10px;
+}
+
+.impact-info {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-radius: 4px;
+    border-left: 3px solid #4CAF50;
+}
+
+.impact-info p {
+    margin: 5px 0;
+    color: #2E7D32;
+}
+
+.vehicle-tips {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #1B5E20;
+}
+
+.history-item p {
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.swap-btn {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+    min-width: 40px;
+    height: 40px;
+}
+
+.swap-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+.swap-btn:active {
+    transform: scale(0.95);
+}
+
+/* Media Queries */
+@media screen and (min-width: 768px) {
+    header {
+        flex-direction: row;
+    }
+
+    .route-inputs {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    input[type="text"], .vehicle-select {
+        width: auto;
+    }
+
+    #calculate-btn {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    header {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .auth-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    #map {
+        height: 300px;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+
+    .modal-content {
+        margin: 20% auto;
+        width: 95%;
+    }
+
+    .history-item {
+        padding: 10px;
+    }
+
+    .delete-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    #map {
+        height: 500px;
+    }
+
+    .chart-container {
+        height: 400px;
+    }
+}
+
+/* Improve touch targets for mobile */
+@media (hover: none) {
+    .auth-btn, #calculate-btn, .delete-btn, .swap-btn {
+        padding: 12px 20px;
+        min-height: 44px;
+    }
+
+    input[type="text"], .vehicle-select {
+        min-height: 44px;
+    }
+}
+
+/* Improve modal for mobile */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        margin: 5% auto;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    #auth-form {
+        gap: 10px;
+    }
+
+    #auth-form input {
+        min-height: 44px;
+    }
 } 

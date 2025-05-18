@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Carbon Calculator</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= GOOGLE_MAPS_API_KEY %>&libraries=places&callback=initMap" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Carbon Calculator</h1>
-            <div id="auth-container">
-                <button id="login-btn" class="auth-btn">Login</button>
-                <button id="signup-btn" class="auth-btn">Sign Up</button>
-                <button id="logout-btn" class="auth-btn" style="display: none;">Logout</button>
+            <div class="user-section">
+                <div id="user-info" style="display: none;">
+                    <span id="user-email"></span>
+                </div>
+                <div id="auth-container">
+                    <button id="login-btn" class="auth-btn">Login</button>
+                    <button id="signup-btn" class="auth-btn">Sign Up</button>
+                    <button id="logout-btn" class="auth-btn" style="display: none;">Logout</button>
+                </div>
             </div>
         </header>
 
@@ -34,7 +43,16 @@
         <main>
             <div class="route-inputs">
                 <input type="text" id="start-point" placeholder="Enter starting point">
+                <button id="swap-btn" class="swap-btn" title="Swap start and destination">⇅</button>
                 <input type="text" id="destination" placeholder="Enter destination">
+                <select id="vehicle-type" class="vehicle-select">
+                    <option value="large_gasoline">Large Gasoline Car (20 MPG)</option>
+                    <option value="medium_gasoline">Medium Gasoline Car (30 MPG)</option>
+                    <option value="small_gasoline">Small Gasoline Car (45 MPG)</option>
+                    <option value="diesel">Diesel Car (35 MPG)</option>
+                    <option value="electric">Electric Car</option>
+                    <option value="motorcycle">Motorcycle (60 MPG)</option>
+                </select>
                 <button id="calculate-btn">Calculate Carbon Footprint</button>
             </div>
 
@@ -48,6 +66,9 @@
 
             <div id="history" class="history-container">
                 <h2>History</h2>
+                <div class="chart-container">
+                    <canvas id="carbonChart"></canvas>
+                </div>
                 <div id="history-list"></div>
             </div>
         </main>
