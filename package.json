@@ -7,7 +7,8 @@
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "watch-ts": "tsc -w"
+    "watch-ts": "tsc -w",
+    "stop": "pm2 stop carbon-calculator && pm2 delete carbon-calculator"
   },
   "keywords": [
     "carbon",

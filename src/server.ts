@@ -8,7 +8,7 @@ import path from 'path';
 dotenv.config();
 
 const app = express();
-const port = 3004;
+const port = process.env.PORT || 3005;
 
 // Firebase configuration
 const firebaseConfig = {
