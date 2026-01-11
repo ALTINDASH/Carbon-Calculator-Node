@@ -11,7 +11,7 @@ const firestore_1 = require("firebase/firestore");
 const path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = 3004;
+const port = process.env.PORT || 3005;
 // Firebase configuration
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,

@@ -174,7 +174,13 @@ let carbonChart;
 
 // Initialize the chart
 function initChart() {
-    const ctx = document.getElementById('carbonChart').getContext('2d');
+    const canvas = document.getElementById('carbonChart');
+    if (!canvas) {
+        console.warn('Chart canvas not found, skipping chart initialization');
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
     carbonChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -222,6 +228,16 @@ function initChart() {
 
 // Update chart with new data
 function updateChart(calculations) {
+    // Ensure chart is initialized
+    if (!carbonChart) {
+        initChart();
+        // If chart still couldn't be initialized, return early
+        if (!carbonChart) {
+            console.warn('Chart not available, skipping chart update');
+            return;
+        }
+    }
+    
     // Group calculations by date
     const dailyData = {};
     calculations.forEach(calc => {
